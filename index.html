@@ -1,0 +1,42 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><title>Satellite MVP – start here</title>
+<style>body{font:15px/1.5 system-ui,sans-serif;max-width:960px;margin:30px auto;padding:0 16px;color:#222}h1{margin-bottom:0}.sub{color:#666}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin:20px 0}.card{border:1px solid #ddd;border-radius:8px;padding:12px}
+.card a{font-weight:600;font-size:16px}img{max-width:100%;border:1px solid #ddd;border-radius:6px}li{margin:3px 0}.warn{background:#fff8e1;border-left:4px solid #f0b400;padding:8px 14px}</style></head><body>
+<h1>Military &amp; classified satellites – MVP</h1>
+<p class="sub">Built 2026-10-17 from public data only: CelesTrak (public orbit data and catalogue), Mike McCants' amateur orbit data for classified satellites, Jonathan McDowell's catalogues, and the SeeSat-L observers' mailing list. No logins.</p>
+<p><b>What this is:</b> a map of military and classified satellites whose orbits are published, by CelesTrak or by amateur observers. There are 1,069 of them: 399 Chinese, 153 Russian, 312 US, 119 objects tracked by amateurs under temporary IDs (Starshield-like), and a few from other countries. For each satellite we show where it is, how good its orbit data is, and when it passes over Bellevue, WA.</p>
+<p><b>About the "no orbit" list:</b> 226 entries are objects listed in the public satellite catalogues as in orbit, but with no published orbit anywhere public. It is a list of catalogue entries, not discoveries. We didn't find anything new.</p>
+<div class="cards">
+<div class="card"><a href="globe3d.html">3D globe →</a><br>Live positions from the freshest public orbit data. Colours show data quality, a click shows that satellite's uncertainty, and Bellevue and its passes are marked. Needs internet for the 3D libraries.<br><img src="globe3d_screenshot.png" alt="globe screenshot"></div>
+<div class="card"><a href="bellevue.html">Passes over Bellevue →</a><br>Passes over the next 72 hours that peak above 20°, in PDT, with filters for visibility, quality tier and country. Snapshot from 2026-10-17; it expires.</div>
+<div class="card"><a href="resilience.html">Starlink resilience &amp; space-safety report →</a><br>Coverage robustness, shell congestion, debris-cascade check and redundancy gaps. Defensive, aggregated, works offline.</div>
+<div class="card"><b>Data downloads</b><ul>
+<li><a href="military_sats.csv">military_sats.csv</a>: the satellite list with metadata</li>
+<li><a href="hifi/summary.csv">hifi/summary.csv</a>: per satellite, the latest orbit, its source and age, uncertainty and quality tier</li>
+<li><a href="hifi/passes_bellevue_72h.csv">hifi/passes_bellevue_72h.csv</a> (4 MB): all Bellevue passes</li>
+<li><a href="constellation_breakdown.csv">constellation_breakdown.csv</a></li>
+<li><a href="untracked_sats.csv">untracked_sats.csv</a>: catalogue entries with no public orbit</li>
+<li><a href="hifi/README.md">hifi/README.md</a>: field definitions and accuracy limits</li></ul>
+<span class="sub">The full 72-hour position files (about 0.9 GB of parquet) are kept offline and not hosted.</span></div>
+</div>
+<h2>Constellations at a glance</h2>
+<img src="constellation_breakdown.png" alt="constellation breakdown chart">
+<p>Downloads are listed in the data card above.</p>
+<h2>Resilience key points</h2>
+<ul>
+<li><b>China is mostly in low orbit</b> (336 low-orbit vs 57 geostationary). Its reconnaissance fleets (Yaogan 164, Jilin-1 45) spread many satellites across shared orbital planes, so losing one satellite costs relatively little.</li>
+<li><b>Russia</b> mixes low-orbit communications and reconnaissance, GLONASS navigation (the only big program with spares flagged in the official catalogue), and high elliptical-orbit early-warning and communications satellites.</li>
+<li><b>The public US picture is mostly geostationary</b> (WGS, AEHF, SBIRS, MUOS: one satellite per slot, none side by side). Most US low-orbit reconnaissance satellites have no public orbit data.</li>
+<li><b>Sparse programs</b> (e.g. Lotos-S with 9 satellites in 9 planes, Bars-M, the US geostationary programs, and 20 single-satellite programs) depend on replacement launches, not spares already in orbit.</li>
+<li><b>Proximity activity worth watching</b> (from public reporting): Russian inspector satellites Cosmos 2576 and 2588 sit near the orbital planes of US satellites, and China's Shijian-21 and Shijian-25 docked in geostationary orbit in 2025. Sources are in the dataset's notes column.</li>
+</ul>
+<h2>Caveats, plainly</h2>
+<div class="warn"><ul>
+<li>Amateur orbit data for classified satellites is km-level at best, often weeks old, and drifts. Positions and pass times can be off by seconds to minutes or more, and by much more if a satellite has maneuvered. Nothing here is metre-level.</li>
+<li>US coverage is incomplete. If no public or amateur source publishes a satellite's orbit, it can't appear on the globe.</li>
+<li>Objects with temporary amateur IDs (e.g. "StarSh") are shown as labelled. We deliberately don't try to work out which official satellite each one is.</li>
+<li>Plane counts and program groupings are rough estimates. Mission labels marked "suspected" are analysts' assessments, not facts.</li>
+<li>"No data found" doesn't mean nobody tracks it. Only telescope observation can confirm that.</li>
+</ul></div>
+<p class="sub">How to regenerate everything: hifi/README.md.</p>
+</body></html>
